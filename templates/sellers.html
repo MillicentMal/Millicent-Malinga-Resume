@@ -1,0 +1,73 @@
+{% extends "layout.html" %}
+{% block head %}
+<title>TASK MASTER </title>
+{% endblock head %}
+{% block body %}
+<div class="content" >
+    <h1 style="text-align: center;">
+        Sellers Bay
+    </h1>
+    {% if products|length < 1%}
+    <h4 style="text-align: center;">
+        Add your work here so customers can find you. 
+    </h4>
+
+    {% else %}
+
+<table>
+    <tr>
+        <th>
+            Product
+        </th>
+        <th>
+            Added
+        </th>
+        <th>
+           Price
+        </th>
+        <th>
+            Example
+        </th>
+        <th>
+            Actions
+        </th>
+    </tr>
+    {% for product in products %}
+    <tr>
+        <td>
+            {{ product.image }}
+        </td>
+        <td>
+            {{ product.name }}
+        </td>
+        <td>
+            {{ product.date_created.date() }}
+        </td>
+        <td>
+            {{ product.price }}
+        </td>
+        <td>
+            {{ product.description }}
+        </td> 
+        <td>
+            <a href="/delete/{{product.id}}">DELETE</a>
+            <br>
+            <a href="/update/{{product.id}}">UPDATE</a>
+        </td>
+
+    </tr>
+   
+    {% endfor %}
+</table>
+{% endif %}
+<form action="/" method="POST">
+<input type="text" name="name" id="name" >
+<input type="file" name="image" id="image" >
+<input type="text" name="description" id="description" >
+<input type="text" name="price" id="price" >
+
+
+<input type="submit" value="Add Product">
+</form>
+</div>
+{% endblock body %}
